@@ -26,7 +26,7 @@ An example of output (depends on compilation and runtime environments):
 
 ## Examples
 
-See [example.md](examples.md) and [its original source](examples/all.rs).
+See [examples.md](examples.md) and [its original source](examples/all.rs).
 
 ## License
 
