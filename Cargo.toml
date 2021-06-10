@@ -2,8 +2,10 @@
 name = "binspect"
 version = "0.1.0"
 authors = ["taskie <t@skie.jp>"]
+license = "MIT/Apache-2.0"
+keywords = ["binary", "byte"]
+readme = "README.md"
+repository = "https://github.com/taskie/binspect"
+categories = ["development-tools::debugging"]
+description = "Utilities to inspect the data layout of objects."
 edition = "2018"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
-[dependencies]
