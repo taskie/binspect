@@ -1,5 +1,10 @@
 # binspect
 
+[![Test](https://github.com/taskie/binspect/workflows/Test/badge.svg)](https://github.com/taskie/binspect/actions)
+[![Latest version](https://img.shields.io/crates/v/binspect.svg)](https://crates.io/crates/binspect)
+[![Documentation](https://docs.rs/binspect/badge.svg)](https://docs.rs/binspect)
+![License](https://img.shields.io/crates/l/binspect.svg)
+
 Rust utilities to inspect the data layout of objects.
 
 This library is for debugging only because data layout of Rust is not be stabilized.
