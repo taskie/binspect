@@ -10,11 +10,9 @@ Please read [Data Layout - The Rustonomicon](https://doc.rust-lang.org/stable/no
 ```rust
 use binspect::binspect;
 
-fn main() {
-    let s = "ABC";
-    binspect!(s);
-    unsafe { binspect!(*s, s.len()) };
-}
+let s = "ABC";
+binspect!(s);
+unsafe { binspect!(*s, s.len()) };
 ```
 
 An example of output (depends on compilation and runtime environments):
