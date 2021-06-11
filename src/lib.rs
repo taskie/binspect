@@ -63,9 +63,21 @@ pub fn write_internal<W: Write, T: ?Sized>(
     let width = 16;
     let center = width / 2;
     if absolute {
-        writeln!(w, "{:p} : {} = {}", record.reference, type_name::<T>(), record.source)?;
+        writeln!(
+            w,
+            "{:p} : {} = {}",
+            record.reference,
+            type_name::<T>(),
+            record.source
+        )?;
     } else {
-        writeln!(w, "-----+ {:p}: {} = {}", record.reference, type_name::<T>(), record.source)?;
+        writeln!(
+            w,
+            "-----+ {:p}: {} = {}",
+            record.reference,
+            type_name::<T>(),
+            record.source
+        )?;
     }
     for (i, x) in record.bytes.iter().enumerate() {
         if i % width == 0 {
@@ -73,7 +85,9 @@ pub fn write_internal<W: Write, T: ?Sized>(
                 writeln!(w)?;
             }
             if absolute {
-                write!(w, "{:p} |", unsafe { (record.reference as *const _ as *const u8).add(i) })?;
+                write!(w, "{:p} |", unsafe {
+                    (record.reference as *const _ as *const u8).add(i)
+                })?;
             } else {
                 write!(w, "{:04x} |", i)?;
             }
