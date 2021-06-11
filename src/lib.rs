@@ -43,27 +43,37 @@ pub fn as_bytes<T>(t: &T) -> &[u8] {
 }
 
 #[doc(hidden)]
+pub struct Record<'a, T: ?Sized> {
+    pub reference: &'a T,
+    pub bytes: &'a [u8],
+    pub sized: bool,
+    pub source: &'a str,
+    pub label: Option<&'a str>,
+    pub file: &'a str,
+    pub line: u32,
+    pub column: u32,
+}
+
+#[doc(hidden)]
 pub fn write_internal<W: Write, T: ?Sized>(
     mut w: W,
-    t: &T,
-    bytes: &[u8],
-    repr: &str,
+    record: &Record<T>,
     absolute: bool,
 ) -> Result<(), io::Error> {
     let width = 16;
     let center = width / 2;
     if absolute {
-        writeln!(w, "{:p} : {} = {}", t, type_name::<T>(), repr)?;
+        writeln!(w, "{:p} : {} = {}", record.reference, type_name::<T>(), record.source)?;
     } else {
-        writeln!(w, "-----+ {:p}: {} = {}", t, type_name::<T>(), repr,)?;
+        writeln!(w, "-----+ {:p}: {} = {}", record.reference, type_name::<T>(), record.source)?;
     }
-    for (i, x) in bytes.iter().enumerate() {
+    for (i, x) in record.bytes.iter().enumerate() {
         if i % width == 0 {
             if i != 0 {
                 writeln!(w)?;
             }
             if absolute {
-                write!(w, "{:p} |", unsafe { (t as *const _ as *const u8).add(i) })?;
+                write!(w, "{:p} |", unsafe { (record.reference as *const _ as *const u8).add(i) })?;
             } else {
                 write!(w, "{:04x} |", i)?;
             }
@@ -72,7 +82,7 @@ pub fn write_internal<W: Write, T: ?Sized>(
         }
         write!(w, " {:02x}", x)?;
     }
-    if !bytes.is_empty() {
+    if !record.bytes.is_empty() {
         writeln!(w)?;
     }
     Ok(())
@@ -80,14 +90,32 @@ pub fn write_internal<W: Write, T: ?Sized>(
 
 #[inline]
 #[doc(hidden)]
-pub fn print_internal<T: ?Sized>(t: &T, bytes: &[u8], repr: &str, absolute: bool) {
-    write_internal(io::stdout().lock(), t, bytes, repr, absolute).unwrap()
+pub fn print_internal<T: ?Sized>(record: &Record<T>, absolute: bool) {
+    write_internal(io::stdout().lock(), record, absolute).unwrap()
 }
 
 #[inline]
 #[doc(hidden)]
-pub fn eprint_internal<T: ?Sized>(t: &T, bytes: &[u8], repr: &str, absolute: bool) {
-    write_internal(io::stderr().lock(), t, bytes, repr, absolute).unwrap()
+pub fn eprint_internal<T: ?Sized>(record: &Record<T>, absolute: bool) {
+    write_internal(io::stderr().lock(), record, absolute).unwrap()
+}
+
+#[macro_export]
+#[doc(hidden)]
+macro_rules! record {
+    ($t: expr, $v: expr, $bs: expr, $sized: expr) => {{
+        let bytes = $bs;
+        $crate::Record {
+            reference: $t,
+            bytes,
+            sized: $sized,
+            source: stringify!($v),
+            label: None,
+            file: file!(),
+            line: line!(),
+            column: column!(),
+        }
+    }};
 }
 
 /// Prints the memory address and the hex representation of an object to stdout.
@@ -108,11 +136,13 @@ pub fn eprint_internal<T: ?Sized>(t: &T, bytes: &[u8], repr: &str, absolute: boo
 macro_rules! binspect {
     ($v: expr) => {{
         let t = &$v;
-        $crate::print_internal(t, $crate::as_bytes(t), stringify!($v), false);
+        let bs = $crate::as_bytes(t);
+        $crate::print_internal(&$crate::record!(t, $v, bs, true), false);
     }};
     ($v: expr, $len: expr) => {{
         let t = &$v;
-        $crate::print_internal(t, $crate::as_bytes_with_len(t, $len), stringify!($v), false);
+        let bs = $crate::as_bytes_with_len(t, $len);
+        $crate::print_internal(&$crate::record!(t, $v, bs, false), false);
     }};
 }
 
@@ -134,11 +164,13 @@ macro_rules! binspect {
 macro_rules! ebinspect {
     ($v: expr) => {{
         let t = &$v;
-        $crate::eprint_internal(t, $crate::as_bytes(t), stringify!($v), false);
+        let bs = $crate::as_bytes(t);
+        $crate::eprint_internal(&$crate::record!(t, $v, bs, true), false);
     }};
     ($v: expr, $len: expr) => {{
         let t = &$v;
-        $crate::eprint_internal(t, $crate::as_bytes_with_len(t, $len), stringify!($v), false);
+        let bs = $crate::as_bytes_with_len(t, $len);
+        $crate::eprint_internal(&$crate::record!(t, $v, bs, false), false);
     }};
 }
 
@@ -162,16 +194,12 @@ macro_rules! ebinspect {
 macro_rules! write_binspect {
     ($w: expr, $v: expr) => {{
         let t = &$v;
-        $crate::write_internal($w, t, $crate::as_bytes(t), stringify!($v), false)
+        let bs = $crate::as_bytes(t);
+        $crate::write_internal($w, &$crate::record!(t, $v, bs, true), false)
     }};
     ($w: expr, $v: expr, $len: expr) => {{
         let t = &$v;
-        $crate::write_internal(
-            $w,
-            t,
-            $crate::as_bytes_with_len(t, $len),
-            stringify!($v),
-            false,
-        )
+        let bs = $crate::as_bytes_with_len(t, $len);
+        $crate::write_internal($w, &$crate::record!(t, $v, bs, false), false)
     }};
 }
