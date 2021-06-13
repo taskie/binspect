@@ -11,7 +11,7 @@ use binspect::binspect;
 
 let s = "ABC";
 binspect!(s);
-unsafe { binspect!(*s, s.len()) };
+binspect!(*s);
 ```
 
 An example of output (depends on compilation and runtime environments):
@@ -38,8 +38,8 @@ pub unsafe fn as_bytes_with_len<T: ?Sized>(t: &T, len: usize) -> &[u8] {
 
 #[inline]
 #[doc(hidden)]
-pub fn as_bytes<T>(t: &T) -> &[u8] {
-    unsafe { as_bytes_with_len(t, mem::size_of::<T>()) }
+pub fn as_bytes<T: ?Sized>(t: &T) -> &[u8] {
+    unsafe { as_bytes_with_len(t, mem::size_of_val::<T>(t)) }
 }
 
 #[doc(hidden)]
@@ -140,12 +140,8 @@ macro_rules! record {
 /// # use binspect::binspect;
 /// let s = "ABC";
 /// binspect!(s);
-/// unsafe { binspect!(*s, s.len()) };
+/// binspect!(*s);
 /// ```
-///
-/// # Safety
-///
-/// A correct byte length must be specified if the value is `!Sized`.
 #[macro_export]
 macro_rules! binspect {
     ($v: expr) => {{
@@ -168,12 +164,8 @@ macro_rules! binspect {
 /// # use binspect::ebinspect;
 /// let s = "ABC";
 /// ebinspect!(s);
-/// unsafe { ebinspect!(*s, s.len()) };
+/// ebinspect!(*s);
 /// ```
-///
-/// # Safety
-///
-/// A correct byte length must be specified if the value is `!Sized`.
 #[macro_export]
 macro_rules! ebinspect {
     ($v: expr) => {{
@@ -198,12 +190,8 @@ macro_rules! ebinspect {
 /// let mut buf: Vec<u8> = vec![];
 /// write_binspect!(&mut buf, s).unwrap();
 /// buf.clear();
-/// unsafe { write_binspect!(&mut buf, *s, s.len()) }.unwrap();
+/// write_binspect!(&mut buf, *s).unwrap();
 /// ```
-///
-/// # Safety
-///
-/// A correct byte length must be specified if the value is `!Sized`.
 #[macro_export]
 macro_rules! write_binspect {
     ($w: expr, $v: expr) => {{
