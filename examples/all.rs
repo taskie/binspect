@@ -19,6 +19,7 @@ fn main() {
     section("Strings", STRINGS, strings);
     section("Trait Objects", TRAIT_OBJECTS, trait_objects);
     section("Boxes", BOXES, boxes);
+    section("DSTs", DSTS, dsts);
     section("Options", OPTIONS, options);
 }
 
@@ -335,6 +336,30 @@ code_fence!(BOXES, {
         let p = Box::into_raw(t);
         binspect!(*unsafe { &*p });
         unsafe { Box::from_raw(p) };
+    }
+});
+
+code_fence!(DSTS, {
+    struct DST1<T: ?Sized> {
+        x: i32,
+        y: T,
+    }
+
+    fn dsts() {
+        let d1 = DST1{
+            x: 42,
+            y: [2u8, 3, 5, 7, 11, 13],
+        };
+        binspect!(d1);
+        let rd1: &DST1<[u8; 6]> = &d1;
+        binspect!(rd1);
+        binspect!(*rd1);
+        let dyn_d1: &DST1<[u8]> = &d1;
+        binspect!(dyn_d1);
+        binspect!(*dyn_d1);
+        let box_d1: Box<DST1<[u8]>> = Box::new(d1);
+        binspect!(box_d1);
+        binspect!(*box_d1);
     }
 });
 

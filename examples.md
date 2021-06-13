@@ -23,31 +23,31 @@ fn primitives() {
 ```
 
 ```text
------+ 0x56395c22a598: bool = false
+-----+ 0x55ea3a18a7c0: bool = false
 0000 | 00
------+ 0x56395c22a5ad: bool = true
+-----+ 0x55ea3a18a7d5: bool = true
 0000 | 01
------+ 0x56395c229ee0: i32 = 42
+-----+ 0x55ea3a189f7c: i32 = 42
 0000 | 2a 00 00 00
------+ 0x56395c229ee4: i32 = -42
+-----+ 0x55ea3a189f80: i32 = -42
 0000 | d6 ff ff ff
------+ 0x56395c22a5b3: u8 = 127u8
+-----+ 0x55ea3a18a7db: u8 = 127u8
 0000 | 7f
------+ 0x56395c22a5ba: u16 = 0xabcd_u16
+-----+ 0x55ea3a18a7e2: u16 = 0xabcd_u16
 0000 | cd ab
------+ 0x56395c229ee8: u32 = 0xefbeadde_u32
+-----+ 0x55ea3a189f84: u32 = 0xefbeadde_u32
 0000 | de ad be ef
------+ 0x56395c22a550: u64 = 5000_0000_0000_0000_u64
+-----+ 0x55ea3a18a778: u64 = 5000_0000_0000_0000_u64
 0000 | 00 80 e0 37 79 c3 11 00
------+ 0x56395c229eec: char = 'A'
+-----+ 0x55ea3a189f88: char = 'A'
 0000 | 41 00 00 00
------+ 0x56395c229ef0: char = 'あ'
+-----+ 0x55ea3a189f8c: char = 'あ'
 0000 | 42 30 00 00
------+ 0x56395c229ef4: char = '😇'
+-----+ 0x55ea3a189f90: char = '😇'
 0000 | 07 f6 01 00
------+ 0x56395c229ef8: f32 = 0.25f32
+-----+ 0x55ea3a189f94: f32 = 0.25f32
 0000 | 00 00 80 3e
------+ 0x56395c22a558: f64 = 0.1
+-----+ 0x55ea3a18a780: f64 = 0.1
 0000 | 9a 99 99 99 99 99 b9 3f
 ```
 
@@ -65,16 +65,16 @@ fn arrays() {
 ```
 
 ```text
------+ 0x56395c229efc: [bool; 4] = [true, false, false, true]
+-----+ 0x55ea3a189f98: [bool; 4] = [true, false, false, true]
 0000 | 01 00 00 01
------+ 0x56395c229ee8: [u16; 2] = [0xadde_u16, 0xefbe]
+-----+ 0x55ea3a189f84: [u16; 2] = [0xadde_u16, 0xefbe]
 0000 | de ad be ef
------+ 0x56395c2402f0: &[u8; 4] = b"\xde\xad\xbe\xef"
-0000 | e8 9e 22 5c 39 56 00 00
------+ 0x56395c229ee8: [u8; 4] = *b"\xde\xad\xbe\xef"
+-----+ 0x55ea3a19a400: &[u8; 4] = b"\xde\xad\xbe\xef"
+0000 | 84 9f 18 3a ea 55 00 00
+-----+ 0x55ea3a189f84: [u8; 4] = *b"\xde\xad\xbe\xef"
 0000 | de ad be ef
------+ 0x56395c2290d8: [u64; 0] = [0_u64; 0]
------+ 0x56395c22a662: [[i8; 3]; 3] = [[1_i8, 2, 3], [4, 5, 6], [7, 8, 9]]
+-----+ 0x55ea3a189130: [u64; 0] = [0_u64; 0]
+-----+ 0x55ea3a18a88a: [[i8; 3]; 3] = [[1_i8, 2, 3], [4, 5, 6], [7, 8, 9]]
 0000 | 01 02 03 04 05 06 07 08 : 09
 ```
 
@@ -91,14 +91,14 @@ fn tuples() {
 ```
 
 ```text
------+ 0x56395c2290d8: () = ()
------+ 0x56395c229ee8: u32 = (0xefbeadde_u32)
+-----+ 0x55ea3a189130: () = ()
+-----+ 0x55ea3a189f84: u32 = (0xefbeadde_u32)
 0000 | de ad be ef
------+ 0x56395c22a6a8: (u64, u32, u16, u8) = (0x1111111111111111_u64, 0x22222222_u32, 0x_3333u16, 0x44_u8)
+-----+ 0x55ea3a1890e0: (u64, u32, u16, u8) = (0x1111111111111111_u64, 0x22222222_u32, 0x_3333u16, 0x44_u8)
 0000 | 11 11 11 11 11 11 11 11 : 22 22 22 22 33 33 44 00
------+ 0x56395c229f00: (u8, u16, u8) = (0x11_u8, 0x2222_u16, 0x33_u8)
+-----+ 0x55ea3a189f9c: (u8, u16, u8) = (0x11_u8, 0x2222_u16, 0x33_u8)
 0000 | 22 22 11 33
------+ 0x56395c22a560: ((), u32, (u8, u16, u8)) = ((), (0xefbeadde_u32), (0x11_u8, 0x2222_u16, 0x33_u8))
+-----+ 0x55ea3a18a788: ((), u32, (u8, u16, u8)) = ((), (0xefbeadde_u32), (0x11_u8, 0x2222_u16, 0x33_u8))
 0000 | de ad be ef 22 22 11 33
 ```
 
@@ -142,14 +142,14 @@ fn structs() {
 ```
 
 ```text
------+ 0x56395c2290d8: all::S1 = S1{}
------+ 0x56395c229ee8: all::S2 = S2{x: 0xefbeadde_u32,}
+-----+ 0x55ea3a189130: all::S1 = S1{}
+-----+ 0x55ea3a189f84: all::S2 = S2{x: 0xefbeadde_u32,}
 0000 | de ad be ef
------+ 0x56395c22a6a8: all::S3 = S3{x: 0x1111111111111111_u64, y: 0x22222222_u32, z: 0x_3333u16, w: 0x44_u8,}
+-----+ 0x55ea3a1890e0: all::S3 = S3{x: 0x1111111111111111_u64, y: 0x22222222_u32, z: 0x_3333u16, w: 0x44_u8,}
 0000 | 11 11 11 11 11 11 11 11 : 22 22 22 22 33 33 44 00
------+ 0x56395c229f00: all::S4 = S4{x: 0x11_u8, y: 0x2222_u16, z: 0x33_u8,}
+-----+ 0x55ea3a189f9c: all::S4 = S4{x: 0x11_u8, y: 0x2222_u16, z: 0x33_u8,}
 0000 | 22 22 11 33
------+ 0x56395c22a560: all::S5 = S5{s1: S1{},
+-----+ 0x55ea3a18a788: all::S5 = S5{s1: S1{},
    s2: S2{x: 0xefbeadde_u32,},
    s4: S4{x: 0x11_u8, y: 0x2222_u16, z: 0x33_u8,},}
 0000 | de ad be ef 22 22 11 33
@@ -200,14 +200,14 @@ fn packed_structs() {
 ```
 
 ```text
------+ 0x56395c2290d8: all::PS1 = PS1{}
------+ 0x56395c229ee8: all::PS2 = PS2{x: 0xefbeadde_u32,}
+-----+ 0x55ea3a189130: all::PS1 = PS1{}
+-----+ 0x55ea3a189f84: all::PS2 = PS2{x: 0xefbeadde_u32,}
 0000 | de ad be ef
------+ 0x56395c22a860: all::PS3 = PS3{x: 0x1111111111111111_u64, y: 0x22222222_u32, z: 0x_3333u16, w: 0x44_u8,}
+-----+ 0x55ea3a18aa51: all::PS3 = PS3{x: 0x1111111111111111_u64, y: 0x22222222_u32, z: 0x_3333u16, w: 0x44_u8,}
 0000 | 11 11 11 11 11 11 11 11 : 22 22 22 22 33 33 44
------+ 0x56395c229f08: all::PS4 = PS4{x: 0x11_u8, y: 0x2222_u16, z: 0x33_u8,}
+-----+ 0x55ea3a189fa4: all::PS4 = PS4{x: 0x11_u8, y: 0x2222_u16, z: 0x33_u8,}
 0000 | 11 22 22 33
------+ 0x56395c22a568: all::PS5 = PS5{s1: PS1{},
+-----+ 0x55ea3a18a790: all::PS5 = PS5{s1: PS1{},
     s2: PS2{x: 0xefbeadde_u32,},
     s4: PS4{x: 0x11_u8, y: 0x2222_u16, z: 0x33_u8,},}
 0000 | de ad be ef 11 22 22 33
@@ -258,14 +258,14 @@ fn c_structs() {
 ```
 
 ```text
------+ 0x56395c2290d8: all::CS1 = CS1{}
------+ 0x56395c229ee8: all::CS2 = CS2{x: 0xefbeadde_u32,}
+-----+ 0x55ea3a189130: all::CS1 = CS1{}
+-----+ 0x55ea3a189f84: all::CS2 = CS2{x: 0xefbeadde_u32,}
 0000 | de ad be ef
------+ 0x56395c22a6a8: all::CS3 = CS3{x: 0x1111111111111111_u64, y: 0x22222222_u32, z: 0x_3333u16, w: 0x44_u8,}
+-----+ 0x55ea3a1890e0: all::CS3 = CS3{x: 0x1111111111111111_u64, y: 0x22222222_u32, z: 0x_3333u16, w: 0x44_u8,}
 0000 | 11 11 11 11 11 11 11 11 : 22 22 22 22 33 33 44 00
------+ 0x56395c22a9b6: all::CS4 = CS4{x: 0x11_u8, y: 0x2222_u16, z: 0x33_u8,}
+-----+ 0x55ea3a18aba6: all::CS4 = CS4{x: 0x11_u8, y: 0x2222_u16, z: 0x33_u8,}
 0000 | 11 00 22 22 33 00
------+ 0x56395c22a9e8: all::CS5 = CS5{s1: CS1{},
+-----+ 0x55ea3a18abd8: all::CS5 = CS5{s1: CS1{},
     s2: CS2{x: 0xefbeadde_u32,},
     s4: CS4{x: 0x11_u8, y: 0x2222_u16, z: 0x33_u8,},}
 0000 | de ad be ef 11 00 22 22 : 33 00 00 00
@@ -286,17 +286,17 @@ fn enums() {
 ```
 
 ```text
------+ 0x56395c22a598: all::E1 = E1::V1
+-----+ 0x55ea3a18a7c0: all::E1 = E1::V1
 0000 | 00
------+ 0x56395c22a5ad: all::E1 = E1::V2
+-----+ 0x55ea3a18a7d5: all::E1 = E1::V2
 0000 | 01
------+ 0x56395c22aa65: all::E1 = E1::V3
+-----+ 0x55ea3a18ac55: all::E1 = E1::V3
 0000 | 02
------+ 0x56395c22a570: all::E2 = E2::V1(0xefbeadde)
+-----+ 0x55ea3a18a798: all::E2 = E2::V1(0xefbeadde)
 0000 | 00 00 00 00 de ad be ef
------+ 0x56395c22a578: all::E2 = E2::V2(0x11, 0x2222, 0x33)
+-----+ 0x55ea3a18a7a0: all::E2 = E2::V2(0x11, 0x2222, 0x33)
 0000 | 01 11 33 00 22 22 00 00
------+ 0x56395c22a580: all::E2 = E2::V3
+-----+ 0x55ea3a18a7a8: all::E2 = E2::V3
 0000 | 02 00 00 00 00 00 00 00
 ```
 
@@ -311,9 +311,9 @@ fn slices() {
 ```
 
 ```text
------+ 0x7ffd2084dee0: &[u16; 2] = bs
-0000 | e8 9e 22 5c 39 56 00 00
------+ 0x56395c229ee8: [u16; 2] = *bs
+-----+ 0x7ffd29d5ccf0: &[u16; 2] = bs
+0000 | 84 9f 18 3a ea 55 00 00
+-----+ 0x55ea3a189f84: [u16; 2] = *bs
 0000 | de ad be ef
 ```
 
@@ -329,12 +329,12 @@ fn vecs() {
 ```
 
 ```text
------+ 0x7ffd2084de10: alloc::vec::Vec<u16> = bs
-0000 | 40 8b c9 5c 39 56 00 00 : 02 00 00 00 00 00 00 00
+-----+ 0x7ffd29d5cc38: alloc::vec::Vec<u16> = bs
+0000 | 40 8b 59 3a ea 55 00 00 : 02 00 00 00 00 00 00 00
 0010 | 02 00 00 00 00 00 00 00
------+ 0x7ffd2084de90: &[u16] = bs.as_ref() as &[u16]
-0000 | 40 8b c9 5c 39 56 00 00 : 02 00 00 00 00 00 00 00
------+ 0x56395cc98b40: [u16] = *bs
+-----+ 0x7ffd29d5ccd8: &[u16] = bs.as_ref() as &[u16]
+0000 | 40 8b 59 3a ea 55 00 00 : 02 00 00 00 00 00 00 00
+-----+ 0x55ea3a598b40: [u16] = *bs
 0000 | de ad be ef
 ```
 
@@ -355,17 +355,17 @@ fn strs() {
 ```
 
 ```text
------+ 0x7ffd2084dc48: &str = s
-0000 | b8 aa 22 5c 39 56 00 00 : 0d 00 00 00 00 00 00 00
------+ 0x56395c22aab8: str = *s
+-----+ 0x7ffd29d5ccb0: &str = s
+0000 | a8 ac 18 3a ea 55 00 00 : 0d 00 00 00 00 00 00 00
+-----+ 0x55ea3a18aca8: str = *s
 0000 | 48 65 6c 6c 6f 2c 20 77 : 6f 72 6c 64 21
------+ 0x7ffd2084dd30: &str = s
-0000 | c8 aa 22 5c 39 56 00 00 : 03 00 00 00 00 00 00 00
------+ 0x56395c22aac8: str = *s
+-----+ 0x7ffd29d5ccd8: &str = s
+0000 | b8 ac 18 3a ea 55 00 00 : 03 00 00 00 00 00 00 00
+-----+ 0x55ea3a18acb8: str = *s
 0000 | e3 81 82
------+ 0x7ffd2084de18: &str = s
-0000 | 0c 9f 22 5c 39 56 00 00 : 04 00 00 00 00 00 00 00
------+ 0x56395c229f0c: str = *s
+-----+ 0x7ffd29d5ccc0: &str = s
+0000 | a8 9f 18 3a ea 55 00 00 : 04 00 00 00 00 00 00 00
+-----+ 0x55ea3a189fa8: str = *s
 0000 | f0 9f 98 87
 ```
 
@@ -389,26 +389,26 @@ fn strings() {
 ```
 
 ```text
------+ 0x7ffd2084da40: alloc::string::String = s
-0000 | 40 8b c9 5c 39 56 00 00 : 0d 00 00 00 00 00 00 00
+-----+ 0x7ffd29d5ccd8: alloc::string::String = s
+0000 | 40 8b 59 3a ea 55 00 00 : 0d 00 00 00 00 00 00 00
 0010 | 0d 00 00 00 00 00 00 00
------+ 0x7ffd2084dac0: &str = s.as_str()
-0000 | 40 8b c9 5c 39 56 00 00 : 0d 00 00 00 00 00 00 00
------+ 0x56395cc98b40: str = *s
+-----+ 0x7ffd29d5ccc0: &str = s.as_str()
+0000 | 40 8b 59 3a ea 55 00 00 : 0d 00 00 00 00 00 00 00
+-----+ 0x55ea3a598b40: str = *s
 0000 | 48 65 6c 6c 6f 2c 20 77 : 6f 72 6c 64 21
------+ 0x7ffd2084dba8: alloc::string::String = s
-0000 | 60 8b c9 5c 39 56 00 00 : 03 00 00 00 00 00 00 00
+-----+ 0x7ffd29d5ccc0: alloc::string::String = s
+0000 | 60 8b 59 3a ea 55 00 00 : 03 00 00 00 00 00 00 00
 0010 | 03 00 00 00 00 00 00 00
------+ 0x7ffd2084dc28: &str = s.as_str()
-0000 | 60 8b c9 5c 39 56 00 00 : 03 00 00 00 00 00 00 00
------+ 0x56395cc98b60: str = *s
+-----+ 0x7ffd29d5ccb0: &str = s.as_str()
+0000 | 60 8b 59 3a ea 55 00 00 : 03 00 00 00 00 00 00 00
+-----+ 0x55ea3a598b60: str = *s
 0000 | e3 81 82
------+ 0x7ffd2084dd10: alloc::string::String = s
-0000 | 80 8b c9 5c 39 56 00 00 : 04 00 00 00 00 00 00 00
+-----+ 0x7ffd29d5cc38: alloc::string::String = s
+0000 | 80 8b 59 3a ea 55 00 00 : 04 00 00 00 00 00 00 00
 0010 | 04 00 00 00 00 00 00 00
------+ 0x7ffd2084dd90: &str = s.as_str()
-0000 | 80 8b c9 5c 39 56 00 00 : 04 00 00 00 00 00 00 00
------+ 0x56395cc98b80: str = *s
+-----+ 0x7ffd29d5ccf0: &str = s.as_str()
+0000 | 80 8b 59 3a ea 55 00 00 : 04 00 00 00 00 00 00 00
+-----+ 0x55ea3a598b80: str = *s
 0000 | f0 9f 98 87
 ```
 
@@ -429,9 +429,9 @@ fn trait_objects() {
 ```
 
 ```text
------+ 0x7ffd2084dec8: &dyn all::T1 = t
-0000 | 00 9f 22 5c 39 56 00 00 : 08 03 24 5c 39 56 00 00
------+ 0x56395c229f00: dyn all::T1 = *t
+-----+ 0x7ffd29d5ccc0: &dyn all::T1 = t
+0000 | 9c 9f 18 3a ea 55 00 00 : 18 a4 19 3a ea 55 00 00
+-----+ 0x55ea3a189f9c: dyn all::T1 = *t
 0000 | 22 22 11 33
 ```
 
@@ -453,14 +453,53 @@ fn boxes() {
 ```
 
 ```text
------+ 0x7ffd2084dd38: alloc::boxed::Box<all::S4> = s
-0000 | 40 8b c9 5c 39 56 00 00
------+ 0x56395cc98b40: all::S4 = *unsafe { &*p }
+-----+ 0x7ffd29d5cd00: alloc::boxed::Box<all::S4> = s
+0000 | 40 8b 59 3a ea 55 00 00
+-----+ 0x55ea3a598b40: all::S4 = *unsafe { &*p }
 0000 | 22 22 11 33
------+ 0x7ffd2084de20: alloc::boxed::Box<dyn all::T1> = t
-0000 | 40 8b c9 5c 39 56 00 00 : 08 03 24 5c 39 56 00 00
------+ 0x56395cc98b40: dyn all::T1 = *unsafe { &*p }
+-----+ 0x7ffd29d5ccc0: alloc::boxed::Box<dyn all::T1> = t
+0000 | 40 8b 59 3a ea 55 00 00 : 18 a4 19 3a ea 55 00 00
+-----+ 0x55ea3a598b40: dyn all::T1 = *unsafe { &*p }
 0000 | 22 22 11 33
+```
+
+## DSTs
+
+```rust
+struct DST1<T: ?Sized> {
+    x: i32,
+    y: T,
+}
+fn dsts() {
+    let d1 = DST1{x: 42, y: [2u8, 3, 5, 7, 11, 13],};
+    binspect!(d1);
+    let rd1: &DST1<[u8; 6]> = &d1;
+    binspect!(rd1);
+    binspect!(* rd1);
+    let dyn_d1: &DST1<[u8]> = &d1;
+    binspect!(dyn_d1);
+    binspect!(* dyn_d1);
+    let box_d1: Box<DST1<[u8]>> = Box::new(d1);
+    binspect!(box_d1);
+    binspect!(* box_d1);
+}
+```
+
+```text
+-----+ 0x7ffd29d5cd00: all::DST1<[u8; 6]> = d1
+0000 | 2a 00 00 00 02 03 05 07 : 0b 0d 00 00
+-----+ 0x7ffd29d5cd20: &all::DST1<[u8; 6]> = rd1
+0000 | 00 cd d5 29 fd 7f 00 00
+-----+ 0x7ffd29d5cd00: all::DST1<[u8; 6]> = *rd1
+0000 | 2a 00 00 00 02 03 05 07 : 0b 0d 00 00
+-----+ 0x7ffd29d5ccd8: &all::DST1<[u8]> = dyn_d1
+0000 | 00 cd d5 29 fd 7f 00 00 : 06 00 00 00 00 00 00 00
+-----+ 0x7ffd29d5cd00: all::DST1<[u8]> = *dyn_d1
+0000 | 2a 00 00 00 02 03 05 07 : 0b 0d 00 00
+-----+ 0x7ffd29d5ccc0: alloc::boxed::Box<all::DST1<[u8]>> = box_d1
+0000 | 40 8b 59 3a ea 55 00 00 : 06 00 00 00 00 00 00 00
+-----+ 0x55ea3a598b40: all::DST1<[u8]> = *box_d1
+0000 | 2a 00 00 00 02 03 05 07 : 0b 0d 00 00
 ```
 
 ## Options
@@ -478,17 +517,17 @@ fn options() {
 ```
 
 ```text
------+ 0x56395c22a588: core::option::Option<i32> = Some(255)
+-----+ 0x55ea3a18a7b0: core::option::Option<i32> = Some(255)
 0000 | 01 00 00 00 ff 00 00 00
------+ 0x56395c22a590: core::option::Option<i32> = None as Option<i32>
+-----+ 0x55ea3a18a7b8: core::option::Option<i32> = None as Option<i32>
 0000 | 00 00 00 00 00 00 00 00
------+ 0x7ffd2084dd60: core::option::Option<&all::S2> = Some(&s2)
-0000 | 5c dd 84 20 fd 7f 00 00
------+ 0x56395c22a590: core::option::Option<&all::S2> = None as Option<&S2>
+-----+ 0x7ffd29d5ccf0: core::option::Option<&all::S2> = Some(&s2)
+0000 | 00 cd d5 29 fd 7f 00 00
+-----+ 0x55ea3a18a7b8: core::option::Option<&all::S2> = None as Option<&S2>
 0000 | 00 00 00 00 00 00 00 00
------+ 0x7ffd2084de38: core::option::Option<*const all::S2> = Some(&s2 as *const _)
-0000 | 01 00 00 00 00 00 00 00 : 5c dd 84 20 fd 7f 00 00
------+ 0x56395c22a6b8: core::option::Option<*const all::S2> = None as Option<*const S2>
+-----+ 0x7ffd29d5ccc0: core::option::Option<*const all::S2> = Some(&s2 as *const _)
+0000 | 01 00 00 00 00 00 00 00 : 00 cd d5 29 fd 7f 00 00
+-----+ 0x55ea3a1890f0: core::option::Option<*const all::S2> = None as Option<*const S2>
 0000 | 00 00 00 00 00 00 00 00 : 00 00 00 00 00 00 00 00
 ```
 
