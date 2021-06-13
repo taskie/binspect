@@ -23,31 +23,31 @@ fn primitives() {
 ```
 
 ```text
------+ 0x5621e97b96c8: bool = false
+-----+ 0x555f343bf630: bool = false
 0000 | 00
------+ 0x5621e97b96ce: bool = true
+-----+ 0x555f343bf645: bool = true
 0000 | 01
------+ 0x5621e97b8f18: i32 = 42
+-----+ 0x555f343bef78: i32 = 42
 0000 | 2a 00 00 00
------+ 0x5621e97b8f1c: i32 = -42
+-----+ 0x555f343bef7c: i32 = -42
 0000 | d6 ff ff ff
------+ 0x5621e97b96d4: u8 = 127u8
+-----+ 0x555f343bf64b: u8 = 127u8
 0000 | 7f
------+ 0x5621e97b96da: u16 = 0xabcd_u16
+-----+ 0x555f343bf652: u16 = 0xabcd_u16
 0000 | cd ab
------+ 0x5621e97b8f20: u32 = 0xefbeadde_u32
+-----+ 0x555f343bef80: u32 = 0xefbeadde_u32
 0000 | de ad be ef
------+ 0x5621e97b9680: u64 = 5000_0000_0000_0000_u64
+-----+ 0x555f343bf5e8: u64 = 5000_0000_0000_0000_u64
 0000 | 00 80 e0 37 79 c3 11 00
------+ 0x5621e97b8f24: char = 'A'
+-----+ 0x555f343bef84: char = 'A'
 0000 | 41 00 00 00
------+ 0x5621e97b8f28: char = 'あ'
+-----+ 0x555f343bef88: char = 'あ'
 0000 | 42 30 00 00
------+ 0x5621e97b8f2c: char = '😇'
+-----+ 0x555f343bef8c: char = '😇'
 0000 | 07 f6 01 00
------+ 0x5621e97b8f30: f32 = 0.25f32
+-----+ 0x555f343bef90: f32 = 0.25f32
 0000 | 00 00 80 3e
------+ 0x5621e97b9688: f64 = 0.1
+-----+ 0x555f343bf5f0: f64 = 0.1
 0000 | 9a 99 99 99 99 99 b9 3f
 ```
 
@@ -65,16 +65,16 @@ fn arrays() {
 ```
 
 ```text
------+ 0x5621e97b8f34: [bool; 4] = [true, false, false, true]
+-----+ 0x555f343bef94: [bool; 4] = [true, false, false, true]
 0000 | 01 00 00 01
------+ 0x5621e97b8f20: [u16; 2] = [0xadde_u16, 0xefbe]
+-----+ 0x555f343bef80: [u16; 2] = [0xadde_u16, 0xefbe]
 0000 | de ad be ef
------+ 0x5621e97cf2c0: &[u8; 4] = b"\xde\xad\xbe\xef"
-0000 | 20 8f 7b e9 21 56 00 00
------+ 0x5621e97b8f20: [u8; 4] = *b"\xde\xad\xbe\xef"
+-----+ 0x555f343ce400: &[u8; 4] = b"\xde\xad\xbe\xef"
+0000 | 80 ef 3b 34 5f 55 00 00
+-----+ 0x555f343bef80: [u8; 4] = *b"\xde\xad\xbe\xef"
 0000 | de ad be ef
------+ 0x5621e97b80d8: [u64; 0] = [0_u64; 0]
------+ 0x5621e97b9782: [[i8; 3]; 3] = [[1_i8, 2, 3], [4, 5, 6], [7, 8, 9]]
+-----+ 0x555f343be130: [u64; 0] = [0_u64; 0]
+-----+ 0x555f343bf6fa: [[i8; 3]; 3] = [[1_i8, 2, 3], [4, 5, 6], [7, 8, 9]]
 0000 | 01 02 03 04 05 06 07 08 : 09
 ```
 
@@ -91,14 +91,14 @@ fn tuples() {
 ```
 
 ```text
------+ 0x5621e97b80d8: () = ()
------+ 0x5621e97b8f20: u32 = (0xefbeadde_u32)
+-----+ 0x555f343be130: () = ()
+-----+ 0x555f343bef80: u32 = (0xefbeadde_u32)
 0000 | de ad be ef
------+ 0x5621e97b97c8: (u64, u32, u16, u8) = (0x1111111111111111_u64, 0x22222222_u32, 0x_3333u16, 0x44_u8)
+-----+ 0x555f343be0e0: (u64, u32, u16, u8) = (0x1111111111111111_u64, 0x22222222_u32, 0x_3333u16, 0x44_u8)
 0000 | 11 11 11 11 11 11 11 11 : 22 22 22 22 33 33 44 00
------+ 0x5621e97b8f38: (u8, u16, u8) = (0x11_u8, 0x2222_u16, 0x33_u8)
+-----+ 0x555f343bef98: (u8, u16, u8) = (0x11_u8, 0x2222_u16, 0x33_u8)
 0000 | 22 22 11 33
------+ 0x5621e97b9690: ((), u32, (u8, u16, u8)) = ((), (0xefbeadde_u32), (0x11_u8, 0x2222_u16, 0x33_u8))
+-----+ 0x555f343bf5f8: ((), u32, (u8, u16, u8)) = ((), (0xefbeadde_u32), (0x11_u8, 0x2222_u16, 0x33_u8))
 0000 | de ad be ef 22 22 11 33
 ```
 
@@ -142,14 +142,14 @@ fn structs() {
 ```
 
 ```text
------+ 0x5621e97b80d8: all::S1 = S1{}
------+ 0x5621e97b8f20: all::S2 = S2{x: 0xefbeadde_u32,}
+-----+ 0x555f343be130: all::S1 = S1{}
+-----+ 0x555f343bef80: all::S2 = S2{x: 0xefbeadde_u32,}
 0000 | de ad be ef
------+ 0x5621e97b97c8: all::S3 = S3{x: 0x1111111111111111_u64, y: 0x22222222_u32, z: 0x_3333u16, w: 0x44_u8,}
+-----+ 0x555f343be0e0: all::S3 = S3{x: 0x1111111111111111_u64, y: 0x22222222_u32, z: 0x_3333u16, w: 0x44_u8,}
 0000 | 11 11 11 11 11 11 11 11 : 22 22 22 22 33 33 44 00
------+ 0x5621e97b8f38: all::S4 = S4{x: 0x11_u8, y: 0x2222_u16, z: 0x33_u8,}
+-----+ 0x555f343bef98: all::S4 = S4{x: 0x11_u8, y: 0x2222_u16, z: 0x33_u8,}
 0000 | 22 22 11 33
------+ 0x5621e97b9690: all::S5 = S5{s1: S1{},
+-----+ 0x555f343bf5f8: all::S5 = S5{s1: S1{},
    s2: S2{x: 0xefbeadde_u32,},
    s4: S4{x: 0x11_u8, y: 0x2222_u16, z: 0x33_u8,},}
 0000 | de ad be ef 22 22 11 33
@@ -200,14 +200,14 @@ fn packed_structs() {
 ```
 
 ```text
------+ 0x5621e97b80d8: all::PS1 = PS1{}
------+ 0x5621e97b8f20: all::PS2 = PS2{x: 0xefbeadde_u32,}
+-----+ 0x555f343be130: all::PS1 = PS1{}
+-----+ 0x555f343bef80: all::PS2 = PS2{x: 0xefbeadde_u32,}
 0000 | de ad be ef
------+ 0x5621e97b9980: all::PS3 = PS3{x: 0x1111111111111111_u64, y: 0x22222222_u32, z: 0x_3333u16, w: 0x44_u8,}
+-----+ 0x555f343bf8c1: all::PS3 = PS3{x: 0x1111111111111111_u64, y: 0x22222222_u32, z: 0x_3333u16, w: 0x44_u8,}
 0000 | 11 11 11 11 11 11 11 11 : 22 22 22 22 33 33 44
------+ 0x5621e97b8f40: all::PS4 = PS4{x: 0x11_u8, y: 0x2222_u16, z: 0x33_u8,}
+-----+ 0x555f343befa0: all::PS4 = PS4{x: 0x11_u8, y: 0x2222_u16, z: 0x33_u8,}
 0000 | 11 22 22 33
------+ 0x5621e97b9698: all::PS5 = PS5{s1: PS1{},
+-----+ 0x555f343bf600: all::PS5 = PS5{s1: PS1{},
     s2: PS2{x: 0xefbeadde_u32,},
     s4: PS4{x: 0x11_u8, y: 0x2222_u16, z: 0x33_u8,},}
 0000 | de ad be ef 11 22 22 33
@@ -258,14 +258,14 @@ fn c_structs() {
 ```
 
 ```text
------+ 0x5621e97b80d8: all::CS1 = CS1{}
------+ 0x5621e97b8f20: all::CS2 = CS2{x: 0xefbeadde_u32,}
+-----+ 0x555f343be130: all::CS1 = CS1{}
+-----+ 0x555f343bef80: all::CS2 = CS2{x: 0xefbeadde_u32,}
 0000 | de ad be ef
------+ 0x5621e97b97c8: all::CS3 = CS3{x: 0x1111111111111111_u64, y: 0x22222222_u32, z: 0x_3333u16, w: 0x44_u8,}
+-----+ 0x555f343be0e0: all::CS3 = CS3{x: 0x1111111111111111_u64, y: 0x22222222_u32, z: 0x_3333u16, w: 0x44_u8,}
 0000 | 11 11 11 11 11 11 11 11 : 22 22 22 22 33 33 44 00
------+ 0x5621e97b9ad6: all::CS4 = CS4{x: 0x11_u8, y: 0x2222_u16, z: 0x33_u8,}
+-----+ 0x555f343bfa16: all::CS4 = CS4{x: 0x11_u8, y: 0x2222_u16, z: 0x33_u8,}
 0000 | 11 00 22 22 33 00
------+ 0x5621e97b9b08: all::CS5 = CS5{s1: CS1{},
+-----+ 0x555f343bfa48: all::CS5 = CS5{s1: CS1{},
     s2: CS2{x: 0xefbeadde_u32,},
     s4: CS4{x: 0x11_u8, y: 0x2222_u16, z: 0x33_u8,},}
 0000 | de ad be ef 11 00 22 22 : 33 00 00 00
@@ -286,17 +286,17 @@ fn enums() {
 ```
 
 ```text
------+ 0x5621e97b96c8: all::E1 = E1::V1
+-----+ 0x555f343bf630: all::E1 = E1::V1
 0000 | 00
------+ 0x5621e97b96ce: all::E1 = E1::V2
+-----+ 0x555f343bf645: all::E1 = E1::V2
 0000 | 01
------+ 0x5621e97b9b85: all::E1 = E1::V3
+-----+ 0x555f343bfac5: all::E1 = E1::V3
 0000 | 02
------+ 0x5621e97b96a0: all::E2 = E2::V1(0xefbeadde)
+-----+ 0x555f343bf608: all::E2 = E2::V1(0xefbeadde)
 0000 | 00 00 00 00 de ad be ef
------+ 0x5621e97b96a8: all::E2 = E2::V2(0x11, 0x2222, 0x33)
+-----+ 0x555f343bf610: all::E2 = E2::V2(0x11, 0x2222, 0x33)
 0000 | 01 11 33 00 22 22 00 00
------+ 0x5621e97b96b0: all::E2 = E2::V3
+-----+ 0x555f343bf618: all::E2 = E2::V3
 0000 | 02 00 00 00 00 00 00 00
 ```
 
@@ -306,14 +306,14 @@ fn enums() {
 fn slices() {
     let bs = &[0xadde_u16, 0xefbe];
     binspect!(bs);
-    unsafe { binspect!(* bs, mem :: size_of :: < u16 > () * bs . len()) };
+    binspect!(* bs);
 }
 ```
 
 ```text
------+ 0x7ffc4318fdc0: &[u16; 2] = bs
-0000 | 20 8f 7b e9 21 56 00 00
------+ 0x5621e97b8f20: [u16; 2] = *bs
+-----+ 0x7ffe4d2f6fa0: &[u16; 2] = bs
+0000 | 80 ef 3b 34 5f 55 00 00
+-----+ 0x555f343bef80: [u16; 2] = *bs
 0000 | de ad be ef
 ```
 
@@ -324,17 +324,17 @@ fn vecs() {
     let bs = vec![0xadde_u16, 0xefbe];
     binspect!(bs);
     binspect!(bs . as_ref() as & [u16]);
-    unsafe { binspect!(* bs, mem :: size_of :: < u16 > () * bs . len()) };
+    binspect!(* bs);
 }
 ```
 
 ```text
------+ 0x7ffc4318fd80: alloc::vec::Vec<u16> = bs
-0000 | 40 fb e7 ea 21 56 00 00 : 02 00 00 00 00 00 00 00
+-----+ 0x7ffe4d2f6ee8: alloc::vec::Vec<u16> = bs
+0000 | 40 bb 73 35 5f 55 00 00 : 02 00 00 00 00 00 00 00
 0010 | 02 00 00 00 00 00 00 00
------+ 0x7ffc4318fd98: &[u16] = bs.as_ref() as &[u16]
-0000 | 40 fb e7 ea 21 56 00 00 : 02 00 00 00 00 00 00 00
------+ 0x5621eae7fb40: [u16] = *bs
+-----+ 0x7ffe4d2f6f88: &[u16] = bs.as_ref() as &[u16]
+0000 | 40 bb 73 35 5f 55 00 00 : 02 00 00 00 00 00 00 00
+-----+ 0x555f3573bb40: [u16] = *bs
 0000 | de ad be ef
 ```
 
@@ -344,28 +344,28 @@ fn vecs() {
 fn strs() {
     let s = "Hello, world!";
     binspect!(s);
-    unsafe { binspect!(* s, s . len()) };
+    binspect!(* s);
     let s = "あ";
     binspect!(s);
-    unsafe { binspect!(* s, s . len()) };
+    binspect!(* s);
     let s = "😇";
     binspect!(s);
-    unsafe { binspect!(* s, s . len()) };
+    binspect!(* s);
 }
 ```
 
 ```text
------+ 0x7ffc4318fd60: &str = s
-0000 | 09 9c 7b e9 21 56 00 00 : 0d 00 00 00 00 00 00 00
------+ 0x5621e97b9c09: str = *s
+-----+ 0x7ffe4d2f6f60: &str = s
+0000 | 18 fb 3b 34 5f 55 00 00 : 0d 00 00 00 00 00 00 00
+-----+ 0x555f343bfb18: str = *s
 0000 | 48 65 6c 6c 6f 2c 20 77 : 6f 72 6c 64 21
------+ 0x7ffc4318fd70: &str = s
-0000 | 19 9c 7b e9 21 56 00 00 : 03 00 00 00 00 00 00 00
------+ 0x5621e97b9c19: str = *s
+-----+ 0x7ffe4d2f6f88: &str = s
+0000 | 28 fb 3b 34 5f 55 00 00 : 03 00 00 00 00 00 00 00
+-----+ 0x555f343bfb28: str = *s
 0000 | e3 81 82
------+ 0x7ffc4318fd80: &str = s
-0000 | 44 8f 7b e9 21 56 00 00 : 04 00 00 00 00 00 00 00
------+ 0x5621e97b8f44: str = *s
+-----+ 0x7ffe4d2f6f70: &str = s
+0000 | a4 ef 3b 34 5f 55 00 00 : 04 00 00 00 00 00 00 00
+-----+ 0x555f343befa4: str = *s
 0000 | f0 9f 98 87
 ```
 
@@ -376,39 +376,39 @@ fn strings() {
     let s = "Hello, world!".to_owned();
     binspect!(s);
     binspect!(s . as_str());
-    unsafe { binspect!(* s, s . len()) };
+    binspect!(* s);
     let s = "あ".to_owned();
     binspect!(s);
     binspect!(s . as_str());
-    unsafe { binspect!(* s, s . len()) };
+    binspect!(* s);
     let s = "😇".to_owned();
     binspect!(s);
     binspect!(s . as_str());
-    unsafe { binspect!(* s, s . len()) };
+    binspect!(* s);
 }
 ```
 
 ```text
------+ 0x7ffc4318fcf0: alloc::string::String = s
-0000 | 40 fb e7 ea 21 56 00 00 : 0d 00 00 00 00 00 00 00
+-----+ 0x7ffe4d2f6f88: alloc::string::String = s
+0000 | 40 bb 73 35 5f 55 00 00 : 0d 00 00 00 00 00 00 00
 0010 | 0d 00 00 00 00 00 00 00
------+ 0x7ffc4318fd08: &str = s.as_str()
-0000 | 40 fb e7 ea 21 56 00 00 : 0d 00 00 00 00 00 00 00
------+ 0x5621eae7fb40: str = *s
+-----+ 0x7ffe4d2f6f70: &str = s.as_str()
+0000 | 40 bb 73 35 5f 55 00 00 : 0d 00 00 00 00 00 00 00
+-----+ 0x555f3573bb40: str = *s
 0000 | 48 65 6c 6c 6f 2c 20 77 : 6f 72 6c 64 21
------+ 0x7ffc4318fd18: alloc::string::String = s
-0000 | 60 fb e7 ea 21 56 00 00 : 03 00 00 00 00 00 00 00
+-----+ 0x7ffe4d2f6f70: alloc::string::String = s
+0000 | 60 bb 73 35 5f 55 00 00 : 03 00 00 00 00 00 00 00
 0010 | 03 00 00 00 00 00 00 00
------+ 0x7ffc4318fd30: &str = s.as_str()
-0000 | 60 fb e7 ea 21 56 00 00 : 03 00 00 00 00 00 00 00
------+ 0x5621eae7fb60: str = *s
+-----+ 0x7ffe4d2f6f60: &str = s.as_str()
+0000 | 60 bb 73 35 5f 55 00 00 : 03 00 00 00 00 00 00 00
+-----+ 0x555f3573bb60: str = *s
 0000 | e3 81 82
------+ 0x7ffc4318fd40: alloc::string::String = s
-0000 | 80 fb e7 ea 21 56 00 00 : 04 00 00 00 00 00 00 00
+-----+ 0x7ffe4d2f6ee8: alloc::string::String = s
+0000 | 80 bb 73 35 5f 55 00 00 : 04 00 00 00 00 00 00 00
 0010 | 04 00 00 00 00 00 00 00
------+ 0x7ffc4318fd58: &str = s.as_str()
-0000 | 80 fb e7 ea 21 56 00 00 : 04 00 00 00 00 00 00 00
------+ 0x5621eae7fb80: str = *s
+-----+ 0x7ffe4d2f6fa0: &str = s.as_str()
+0000 | 80 bb 73 35 5f 55 00 00 : 04 00 00 00 00 00 00 00
+-----+ 0x555f3573bb80: str = *s
 0000 | f0 9f 98 87
 ```
 
@@ -424,14 +424,14 @@ impl T1 for S4 {
 fn trait_objects() {
     let t: &dyn T1 = &S4{x: 0x11_u8, y: 0x2222_u16, z: 0x33_u8,};
     binspect!(t);
-    unsafe { binspect!(* t, mem :: size_of :: < S4 > ()) };
+    binspect!(* t);
 }
 ```
 
 ```text
------+ 0x7ffc4318fdb0: &dyn all::T1 = t
-0000 | 38 8f 7b e9 21 56 00 00 : 08 f3 7c e9 21 56 00 00
------+ 0x5621e97b8f38: dyn all::T1 = *t
+-----+ 0x7ffe4d2f6f70: &dyn all::T1 = t
+0000 | 98 ef 3b 34 5f 55 00 00 : 18 e4 3c 34 5f 55 00 00
+-----+ 0x555f343bef98: dyn all::T1 = *t
 0000 | 22 22 11 33
 ```
 
@@ -442,25 +442,25 @@ fn boxes() {
     let s = Box::new(S4{x: 0x11_u8, y: 0x2222_u16, z: 0x33_u8,});
     binspect!(s);
     let p = Box::into_raw(s);
-    unsafe { binspect!(* p) };
+    binspect!(* unsafe { & * p });
     unsafe { Box::from_raw(p) };
     let t: Box<dyn T1> = Box::new(S4{x: 0x11_u8, y: 0x2222_u16, z: 0x33_u8,});
     binspect!(t);
     let p = Box::into_raw(t);
-    unsafe { binspect!(* p, mem :: size_of :: < S4 > ()) };
+    binspect!(& unsafe { & * p });
     unsafe { Box::from_raw(p) };
 }
 ```
 
 ```text
------+ 0x7ffc4318fd30: alloc::boxed::Box<all::S4> = s
-0000 | 40 fb e7 ea 21 56 00 00
------+ 0x5621eae7fb40: all::S4 = *p
+-----+ 0x7ffe4d2f6fb0: alloc::boxed::Box<all::S4> = s
+0000 | 40 bb 73 35 5f 55 00 00
+-----+ 0x555f3573bb40: all::S4 = *unsafe { &*p }
 0000 | 22 22 11 33
------+ 0x7ffc4318fd48: alloc::boxed::Box<dyn all::T1> = t
-0000 | 40 fb e7 ea 21 56 00 00 : 08 f3 7c e9 21 56 00 00
------+ 0x5621eae7fb40: dyn all::T1 = *p
-0000 | 22 22 11 33
+-----+ 0x7ffe4d2f6f88: alloc::boxed::Box<dyn all::T1> = t
+0000 | 40 bb 73 35 5f 55 00 00 : 18 e4 3c 34 5f 55 00 00
+-----+ 0x7ffe4d2f6fc8: &&dyn all::T1 = &unsafe { &*p }
+0000 | 70 6f 2f 4d fe 7f 00 00
 ```
 
 ## Options
@@ -478,17 +478,17 @@ fn options() {
 ```
 
 ```text
------+ 0x5621e97b96b8: core::option::Option<i32> = Some(255)
+-----+ 0x555f343bf620: core::option::Option<i32> = Some(255)
 0000 | 01 00 00 00 ff 00 00 00
------+ 0x5621e97b96c0: core::option::Option<i32> = None as Option<i32>
+-----+ 0x555f343bf628: core::option::Option<i32> = None as Option<i32>
 0000 | 00 00 00 00 00 00 00 00
------+ 0x7ffc4318fd90: core::option::Option<&all::S2> = Some(&s2)
-0000 | 8c fd 18 43 fc 7f 00 00
------+ 0x5621e97b96c0: core::option::Option<&all::S2> = None as Option<&S2>
+-----+ 0x7ffe4d2f6fa0: core::option::Option<&all::S2> = Some(&s2)
+0000 | b8 6f 2f 4d fe 7f 00 00
+-----+ 0x555f343bf628: core::option::Option<&all::S2> = None as Option<&S2>
 0000 | 00 00 00 00 00 00 00 00
------+ 0x7ffc4318fd98: core::option::Option<*const all::S2> = Some(&s2 as *const _)
-0000 | 01 00 00 00 00 00 00 00 : 8c fd 18 43 fc 7f 00 00
------+ 0x5621e97b97d8: core::option::Option<*const all::S2> = None as Option<*const S2>
+-----+ 0x7ffe4d2f6f70: core::option::Option<*const all::S2> = Some(&s2 as *const _)
+0000 | 01 00 00 00 00 00 00 00 : b8 6f 2f 4d fe 7f 00 00
+-----+ 0x555f343be0f0: core::option::Option<*const all::S2> = None as Option<*const S2>
 0000 | 00 00 00 00 00 00 00 00 : 00 00 00 00 00 00 00 00
 ```
 

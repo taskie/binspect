@@ -1,6 +1,5 @@
 #![allow(dead_code)]
 use binspect::binspect;
-use std::mem;
 
 fn main() {
     println!("# Examples");
@@ -248,7 +247,7 @@ code_fence!(SLICES, {
     fn slices() {
         let bs = &[0xadde_u16, 0xefbe];
         binspect!(bs);
-        unsafe { binspect!(*bs, mem::size_of::<u16>() * bs.len()) };
+        binspect!(*bs);
     }
 });
 
@@ -257,7 +256,7 @@ code_fence!(VECS, {
         let bs = vec![0xadde_u16, 0xefbe];
         binspect!(bs);
         binspect!(bs.as_ref() as &[u16]);
-        unsafe { binspect!(*bs, mem::size_of::<u16>() * bs.len()) };
+        binspect!(*bs);
     }
 });
 
@@ -265,13 +264,13 @@ code_fence!(STRS, {
     fn strs() {
         let s = "Hello, world!";
         binspect!(s);
-        unsafe { binspect!(*s, s.len()) };
+        binspect!(*s);
         let s = "あ";
         binspect!(s);
-        unsafe { binspect!(*s, s.len()) };
+        binspect!(*s);
         let s = "😇";
         binspect!(s);
-        unsafe { binspect!(*s, s.len()) };
+        binspect!(*s);
     }
 });
 
@@ -280,15 +279,15 @@ code_fence!(STRINGS, {
         let s = "Hello, world!".to_owned();
         binspect!(s);
         binspect!(s.as_str());
-        unsafe { binspect!(*s, s.len()) };
+        binspect!(*s);
         let s = "あ".to_owned();
         binspect!(s);
         binspect!(s.as_str());
-        unsafe { binspect!(*s, s.len()) };
+        binspect!(*s);
         let s = "😇".to_owned();
         binspect!(s);
         binspect!(s.as_str());
-        unsafe { binspect!(*s, s.len()) };
+        binspect!(*s);
     }
 });
 
@@ -312,7 +311,7 @@ code_fence!(TRAIT_OBJECTS, {
             z: 0x33_u8,
         };
         binspect!(t);
-        unsafe { binspect!(*t, mem::size_of::<S4>()) };
+        binspect!(*t);
     }
 });
 
@@ -325,7 +324,7 @@ code_fence!(BOXES, {
         });
         binspect!(s);
         let p = Box::into_raw(s);
-        unsafe { binspect!(*p) };
+        binspect!(*unsafe { &*p });
         unsafe { Box::from_raw(p) };
         let t: Box<dyn T1> = Box::new(S4 {
             x: 0x11_u8,
@@ -334,7 +333,7 @@ code_fence!(BOXES, {
         });
         binspect!(t);
         let p = Box::into_raw(t);
-        unsafe { binspect!(*p, mem::size_of::<S4>()) };
+        binspect!(&unsafe { &*p });
         unsafe { Box::from_raw(p) };
     }
 });
