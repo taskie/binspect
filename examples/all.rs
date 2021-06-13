@@ -333,7 +333,7 @@ code_fence!(BOXES, {
         });
         binspect!(t);
         let p = Box::into_raw(t);
-        binspect!(&unsafe { &*p });
+        binspect!(*unsafe { &*p });
         unsafe { Box::from_raw(p) };
     }
 });
