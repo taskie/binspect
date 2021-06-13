@@ -346,7 +346,7 @@ code_fence!(DSTS, {
     }
 
     fn dsts() {
-        let d1 = DST1{
+        let d1 = DST1 {
             x: 42,
             y: [2u8, 3, 5, 7, 11, 13],
         };
