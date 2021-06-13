@@ -17,7 +17,7 @@ use binspect::binspect;
 
 let s = "ABC";
 binspect!(s);
-unsafe { binspect!(*s, s.len()) };
+binspect!(*s);
 ```
 
 An example of output (depends on compilation and runtime environments):
