@@ -205,3 +205,129 @@ macro_rules! write_binspect {
         $crate::write_internal($w, &$crate::record!(t, $v, bs, false), false)
     }};
 }
+
+/// Dumps the memory address and the hex representation of an object as a string.
+///
+/// # Examples
+///
+/// ```
+/// # use binspect::binspect_string;
+/// let s = "ABC";
+/// let binstring: String = binspect_string!(s);
+/// print!("{}", &binstring);
+/// let binstring: String = binspect_string!(*s);
+/// print!("{}", &binstring);
+/// ```
+#[macro_export]
+macro_rules! binspect_string {
+    ($v: expr) => {{
+        let mut buf: Vec<u8> = vec![];
+        write_binspect!(&mut buf, $v).unwrap();
+        String::from_utf8(buf).unwrap()
+    }};
+    ($v: expr, $len: expr) => {{
+        let mut buf: Vec<u8> = vec![];
+        write_binspect!(&mut buf, $v, $len).unwrap();
+        String::from_utf8(buf).unwrap()
+    }};
+}
+
+#[cfg(test)]
+mod tests {
+    #[test]
+    fn test_binspect_string() {
+        let s = "ABC";
+        let actual: String = binspect_string!(s);
+        assert!(actual.starts_with("-----+ 0x"));
+        assert!(actual.contains("0000 |"));
+        assert!(actual.contains(": &str = s"));
+        let actual: String = binspect_string!(*s);
+        assert!(actual.starts_with("-----+ 0x"));
+        assert!(actual.contains(": str = *s"));
+        assert!(actual.contains("0000 |"));
+    }
+
+    #[test]
+    fn test_binspect_string_with_len() {
+        let s = "ABC";
+        let actual: String = unsafe { binspect_string!(*s, 3) };
+        assert!(actual.starts_with("-----+ 0x"));
+        assert!(actual.contains(": str = *s"));
+        assert!(actual.contains("0000 |"));
+    }
+
+    macro_rules! assert_content {
+        ($s: expr; [ $($contains: expr),* ] $(; [ $($not_contains: expr),* ])?) => {
+            $(
+                assert!($s.contains($contains));
+            )*
+            $($(
+                assert!(!$s.contains($not_contains));
+            )*)?
+        };
+    }
+
+    #[test]
+    fn test_binspect_string_various() {
+        assert_content!(binspect_string!(*""); ["-----+ 0x"]; ["0000 |", " : ", "0010 |"]);
+        assert_content!(binspect_string!(*"0");["-----+ 0x", "0000 |"]; [" : ", "0010 |"]);
+        assert_content!(binspect_string!(*"01234567"); ["-----+ 0x", "0000 |"]; [" : ", "0010 |"]);
+        assert_content!(binspect_string!(*"012345678"); ["-----+ 0x", "0000 |", " : "]; ["0010 |"]);
+        assert_content!(binspect_string!(*"0123456789ABCDEF"); ["-----+ 0x", "0000 |", " : "]; ["0010 |"]);
+        assert_content!(binspect_string!(*"0123456789ABCDEF0"); ["-----+ 0x", "0000 |", " : ", "0010 |"]);
+    }
+
+    #[test]
+    fn write_binspect() {
+        let s = "ABC";
+        let mut buf: Vec<u8> = vec![];
+        write_binspect!(&mut buf, s).unwrap();
+        let actual = String::from_utf8(buf).unwrap();
+        assert!(actual.starts_with("-----+ 0x"));
+        assert!(actual.contains("0000 |"));
+        assert!(actual.contains(": &str = s"));
+        let mut buf: Vec<u8> = vec![];
+        write_binspect!(&mut buf, *s).unwrap();
+        let actual = String::from_utf8(buf).unwrap();
+        assert!(actual.starts_with("-----+ 0x"));
+        assert!(actual.contains(": str = *s"));
+        assert!(actual.contains("0000 |"));
+    }
+
+    #[test]
+    fn write_binspect_with_len() {
+        let s = "ABC";
+        let mut buf: Vec<u8> = vec![];
+        unsafe { write_binspect!(&mut buf, *s, 3) }.unwrap();
+        let actual = String::from_utf8(buf).unwrap();
+        assert!(actual.starts_with("-----+ 0x"));
+        assert!(actual.contains(": str = *s"));
+        assert!(actual.contains("0000 |"));
+    }
+
+    #[test]
+    fn test_binspect() {
+        let s = "ABC";
+        binspect!(s);
+        binspect!(*s);
+    }
+
+    #[test]
+    fn test_binspect_with_len() {
+        let s = "ABC";
+        unsafe { binspect!(*s, 3) };
+    }
+
+    #[test]
+    fn test_ebinspect() {
+        let s = "ABC";
+        ebinspect!(s);
+        ebinspect!(*s);
+    }
+
+    #[test]
+    fn test_ebinspect_with_len() {
+        let s = "ABC";
+        unsafe { ebinspect!(*s, 3) };
+    }
+}
